@@ -21,9 +21,56 @@ import {
   FolderOpen,
   Users,
 } from "lucide-react"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 
 // Import the CV file (make sure the path is correct)
 const cvFile = '/public/documents/Phumlani_Mthembu_CV.pdf';
+
+// Animation variants
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+}
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.6 } }
+}
+
+const slideInFromLeft = {
+  hidden: { opacity: 0, x: -50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+}
+
+const slideInFromRight = {
+  hidden: { opacity: 0, x: 50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+}
+
+const scaleUp = {
+  hidden: { scale: 0.95, opacity: 0 },
+  show: { scale: 1, opacity: 1, transition: { duration: 0.5 } }
+}
+
+const hoverEffect = {
+  scale: 1.03,
+  transition: { duration: 0.3 }
+}
+
+const tapEffect = {
+  scale: 0.98
+}
 
 export default function Portfolio() {
   // Function to handle CV download
@@ -41,69 +88,412 @@ export default function Portfolio() {
     document.body.removeChild(link);
   };
 
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section with #191f41 background */}
-      <section id="about" className="py-24 sm:py-24 bg-[#191f41] text-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2">
-              <h1 className="text-4xl sm:text-5xl font-bold mb-8 leading-tight">
-                Hi, I'm <span className="text-[#0980b2]">Phumlani Sibonelo Mthembu</span>
-              </h1>
-              <h2 className="text-xl sm:text-3xl font-medium mb-8">Senior Software Developer</h2>
-              <p className="text-grey-50 mb-12 max-w-lg">
-                A seasoned software developer with 2+ years of professional experience, specializing in building responsive web applications using modern technologies. Holder of a Diploma in Software Development with expertise across the full stack.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  className="bg-[#0980b2] hover:bg-[#0980b2]/90"
-                  onClick={handleDownloadCV}
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Resume
-                </Button>
-              </div>
-            </div>
+  // Intersection Observer hooks for scroll animations
+  const [aboutRef, aboutInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [experienceRef, experienceInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [skillsRef, skillsInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [projectsRef, projectsInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
-            <div className="lg:w-1/2 flex justify-center">
-              <div className="w-64 h-64 sm:w-80 sm:h-80 bg-white/10 rounded-full flex items-center justify-center overflow-hidden backdrop-blur-sm relative">
-                <Image
-                  src="/images/ps pic.jpeg"
-                  alt="Profile"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+  return (
+    <div className="min-h-screen  bg-white">
+      {/* Hero Section with Galaxy Animation */}
+    <section id="about" className="relative min-h-screen py-24 sm:py-24 bg-[#191f41] text-white overflow-hidden">
+      {/* Dynamic particle background */}
+  <div className="absolute inset-0">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1 h-1 bg-blue-400 rounded-full"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          opacity: [0, 1, 0],
+          scale: [0.5, 1.5, 0.5],
+          x: [0, Math.random() * 50 - 25],
+          y: [0, Math.random() * 50 - 25],
+        }}
+        transition={{
+          duration: 3 + Math.random() * 3,
+          repeat: Infinity,
+          delay: Math.random() * 3,
+          ease: "easeInOut"
+        }}
+      />
+    ))}
+  </div>
+
+  {/* Floating geometric shapes */}
+  <motion.div 
+    className="absolute top-20 left-10 w-32 h-32 border border-blue-400/30"
+    animate={{ 
+      rotate: [0, 360],
+      scale: [1, 1.1, 1],
+    }}
+    transition={{ 
+      rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+      scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+    }}
+  />
+  
+  <motion.div 
+    className="absolute bottom-20 right-16 w-24 h-24 bg-purple-500/20 rounded-full"
+    animate={{
+      y: [-20, 20, -20],
+      x: [-10, 10, -10],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+  />
+
+  <div className="container mx-auto px-4 sm:px-6 relative z-10 h-full flex items-center">
+    <div className="flex flex-col lg:flex-row items-center gap-12 w-full">
+      <motion.div 
+        className="lg:w-1/2"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h1 
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 leading-tight relative"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, type: "spring" }}
+        >
+          Hi, I'm <span className="text-[#0980b2]">Phumlani Sibonelo Mthembu</span>
+          {/* Glowing effect */}
+          <motion.div 
+            className="absolute inset-0 text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent blur-sm opacity-50"
+            animate={{
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            Hi, I'm Phumlani Sibonelo Mthembu
+          </motion.div>
+        </motion.h1>
+        
+        <motion.h2
+          className="text-xl sm:text-3xl font-medium mb-8"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          A Software Developer
+        </motion.h2>
+        
+        <motion.p 
+          className="text-gray-300 mb-12 max-w-lg leading-relaxed"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          
+        </motion.p>
+        
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <Button 
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+            onClick={handleDownloadCV}
+            asChild
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="flex items-center">
+                <Download className="w-4 h-4 mr-2" />
+                Download Resume
               </div>
-            </div>
+            </motion.div>
+          </Button>
+        </motion.div>
+      </motion.div>
+
+      <motion.div 
+        className="lg:w-1/2 flex justify-center"
+        initial={{ scale: 0, rotate: -180 }}
+        whileInView={{ scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ 
+          duration: 1,
+          type: "spring",
+          bounce: 0.6,
+          delay: 0.5
+        }}
+      >
+        <motion.div 
+          className="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 shadow-2xl flex items-center justify-center relative overflow-hidden border-4 border-[#0980b2]/30"
+          whileHover={{ scale: 1.05 }}
+          animate={{
+            boxShadow: [
+              "0 0 20px rgba(59, 130, 246, 0.5)",
+              "0 0 40px rgba(147, 51, 234, 0.7)",
+              "0 0 20px rgba(59, 130, 246, 0.5)",
+            ],
+          }}
+          transition={{
+            boxShadow: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        >
+          <Image
+            src="/images/ps pic.jpeg"
+            alt="Profile"
+            width={320}
+            height={320}
+            className="object-cover rounded-full"
+            priority
+          />
+          
+          {/* Orbital rings */}
+          <motion.div 
+            className="absolute inset-0 border-2 border-blue-400/30 rounded-full"
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div 
+            className="absolute inset-2 border border-purple-400/30 rounded-full"
+            animate={{ rotate: [360, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          />
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* Cosmic dust overlay */}
+  <motion.div 
+    className="absolute inset-0 opacity-30"
+    style={{
+      background: `radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                   radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                   radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%)`
+    }}
+    animate={{
+      opacity: [0.1, 0.3, 0.1],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+  />
+
+  {/* Scroll indicator */}
+  <motion.div 
+    className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
+    animate={{ y: [0, 10, 0] }}
+    transition={{ duration: 2, repeat: Infinity }}
+  >
+    <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+      <motion.div 
+        className="w-1 h-2 bg-white rounded-full mt-2"
+        animate={{ y: [0, 4, 0], opacity: [1, 0.5, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      />
+    </div>
+  </motion.div>
+</section>
+
+
+
+{/* About Me Section */}
+<section id="about" className="py-16 sm:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="max-w-5xl mx-auto">
+      {/* Section Header */}
+      <motion.div 
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent mb-6">
+          About Me
+        </h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
+      </motion.div>
+
+      {/* Main Card */}
+      <motion.div
+        className="relative"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        {/* Floating Background Elements */}
+        <div className="absolute -top-4 -left-4 w-20 h-20 bg-blue-200 rounded-full opacity-50 blur-xl"></div>
+        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-200 rounded-full opacity-40 blur-xl"></div>
+        <div className="absolute top-1/2 -left-8 w-16 h-16 bg-pink-200 rounded-full opacity-30 blur-lg"></div>
+
+        {/* Main Content Card */}
+        <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-xl border border-white/50">
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            
+            {/* Profile Section */}
+            <motion.div 
+              className="lg:col-span-1 text-center lg:text-left"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="relative inline-block mb-6">
+                <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+                  SD
+                </div>
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Software Developer</h3>
+              <p className="text-gray-600 mb-4">Full-Stack Enthusiast</p>
+              
+              <div className="flex justify-center lg:justify-start space-x-1 mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: 0.6 + i * 0.1 }}
+                  />
+                ))}
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-blue-600">2+</div>
+                  <div className="text-sm text-gray-600">Years Exp</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-purple-600">∞</div>
+                  <div className="text-sm text-gray-600">Learning</div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Content Section */}
+            <motion.div 
+              className="lg:col-span-2 space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-700 leading-relaxed text-lg mb-4">
+                  I'm a <span className="font-semibold text-blue-600">dedicated software developer</span> with over two years of hands-on experience creating responsive, user-friendly web applications. I hold a Diploma in Software Development and work confidently across the full stack.
+                </p>
+                
+                <p className="text-gray-700 leading-relaxed">
+                  My passion lies in <span className="italic text-purple-600">transforming complex problems</span> into elegant, efficient solutions. I thrive in collaborative environments where innovation meets practicality.
+                </p>
+              </div>
+
+              {/* Skills Flow
+              <div className="flex flex-wrap gap-3 mt-8">
+                {['React', 'Node.js', 'JavaScript', 'Python', 'SQL', 'Git', 'AWS', 'MongoDB'].map((skill, index) => (
+                  <motion.span
+                    key={skill}
+                    className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-gray-700 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-shadow cursor-default"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div> */}
+
+              {/* Philosophy */}
+              <div className="mt-8 p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 rounded-2xl border-l-4 border-gradient-to-b from-blue-400 to-purple-500">
+                <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
+                  <span className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mr-3"></span>
+                  My Philosophy
+                </h4>
+                <p className="text-gray-600 italic">
+                  "Code is poetry written in logic. Every line should tell a story, every function should have a purpose, and every project should make a difference."
+                </p>
+              </div>
+            </motion.div>
           </div>
+
+         
+          
         </div>
-      </section>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Experience Section - Timeline Style */}
-      <section id="experience" className="py-16 sm:py-24 bg-[#f9fafb]">
+      <section id="experience" className="py-16 sm:py-24 bg-[#f9fafb]" ref={experienceRef}>
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate={experienceInView ? "show" : "hidden"}
+            variants={fadeIn}
+          >
             <h2 className="text-3xl font-bold text-[#191f41] mb-4">Work Experience</h2>
             <p className="text-grey-50 max-w-2xl mx-auto">
               My professional journey spanning 2+ years in the tech industry
             </p>
-          </div>
+          </motion.div>
 
           <div className="max-w-6xl mx-auto">
             {/* Timeline Container */}
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0980b2] via-[#0980b2]/60 to-[#0980b2]/30"></div>
+              <motion.div 
+                className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0980b2] via-[#0980b2]/60 to-[#0980b2]/30"
+                initial={{ scaleY: 0 }}
+                animate={experienceInView ? { scaleY: 1 } : {}}
+                transition={{ duration: 0.8 }}
+              />
               
               {/* Timeline Items */}
-              <div className="space-y-12">
-                
+              <motion.div 
+                className="space-y-12"
+                variants={container}
+                initial="hidden"
+                animate={experienceInView ? "show" : "hidden"}
+              >
                 {/* Current Position */}
-                <div className="relative flex items-start group">
+                <motion.div 
+                  className="relative flex items-start group"
+                  variants={item}
+                >
                   {/* Timeline Dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2] rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300"></div>
+                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2] rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
                   
                   {/* Content */}
                   <div className="ml-20 w-full">
@@ -138,12 +528,15 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Previous Position 1 */}
-                <div className="relative flex items-start group">
+                <motion.div 
+                  className="relative flex items-start group"
+                  variants={item}
+                >
                   {/* Timeline Dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/70 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300"></div>
+                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/70 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
                   
                   {/* Content */}
                   <div className="ml-20 w-full">
@@ -172,12 +565,15 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Previous Position 2 */}
-                <div className="relative flex items-start group">
+                <motion.div 
+                  className="relative flex items-start group"
+                  variants={item}
+                >
                   {/* Timeline Dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/50 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300"></div>
+                  <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/50 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
                   
                   {/* Content */}
                   <div className="ml-20 w-full">
@@ -206,245 +602,436 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                </div>
-
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 sm:py-24">
+      <section className="py-16 sm:py-24" ref={skillsRef}>
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial="hidden"
+            animate={skillsInView ? "show" : "hidden"}
+            variants={fadeIn}
+          >
             <h2 className="text-3xl font-bold text-[#191f41] mb-4">Skills & Technologies</h2>
             <p className="text-grey-50 max-w-2xl mx-auto">
               The tools and technologies I've mastered through 2+ years of professional experience
             </p>
-          </div>
+          </motion.div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={container}
+            initial="hidden"
+            animate={skillsInView ? "show" : "hidden"}
+          >
             {/* Frontend Technologies */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <Code className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <Code className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Frontend</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Frontend</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">HTML</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">CSS</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Next.js</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Tailwind CSS</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">HTML</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">CSS</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Next.js</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Tailwind CSS</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Backend Technologies */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <Code className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <Code className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Backend</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Backend</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Node.js</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Express</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MongoDB</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MySQL</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Node.js</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Express</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MongoDB</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MySQL</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Mobile Development */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <Code className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <Code className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Mobile</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Mobile</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React Native</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React Native</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Version Control */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <Github className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <Github className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Version Control</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Version Control</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Git</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">GitHub</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Git</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">GitHub</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Deployment */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <ExternalLink className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <ExternalLink className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Deployment</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Deployment</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Vercel</Badge>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Vercel</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Tools */}
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                    <Code className="text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
+                      <Code className="text-[#0980b2]" />
+                    </div>
+                    <h3 className="font-bold text-[#191f41]">Tools</h3>
                   </div>
-                  <h3 className="font-bold text-[#191f41]">Tools</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">VS Code</Badge>
-                  <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Figma</Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">VS Code</Badge>
+                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Figma</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
 
+      {/* Education Section */}
+<section id="education" className="py-16 sm:py-24 bg-gradient-to-br from-blue-50 to-purple-50">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto">
+      {/* Section Header */}
+      <motion.div 
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent mb-6">
+          Education
+        </h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
+      </motion.div>
+
+      {/* Education Timeline */}
+      <div className="relative">
+        {/* Timeline Line */}
+        <motion.div 
+          className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0980b2] via-[#0980b2]/60 to-[#0980b2]/30"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        />
+        
+        {/* Education Items */}
+        <motion.div 
+          className="space-y-12"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {/* Tshwane University */}
+          <motion.div 
+            className="relative flex items-start group"
+            variants={item}
+          >
+            {/* Timeline Dot */}
+            <div className="absolute left-6 w-4 h-4 bg-[#0980b2] rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
+            
+            {/* Content */}
+            <div className="ml-20 w-full">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#191f41] mb-1">Diploma in Software Development</h3>
+                  <p className="text-[#0980b2] font-semibold text-lg">Tshwane University of Technology</p>
+                </div>
+                <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
+                  2022
+                </span>
+              </div>
+              
+              <div className="space-y-3 text-[#191f41] leading-relaxed">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-[#0980b2] rounded-full mt-2 flex-shrink-0"></div>
+                  <p>Completed comprehensive training in software development principles, web technologies, and programming methodologies.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-[#0980b2] rounded-full mt-2 flex-shrink-0"></div>
+                  <p>Gained hands-on experience with modern web development frameworks and database technologies.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* IT Fundamentals */}
+          <motion.div 
+            className="relative flex items-start group"
+            variants={item}
+          >
+            {/* Timeline Dot */}
+            <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/70 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
+            
+            {/* Content */}
+            <div className="ml-20 w-full">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#191f41] mb-1">IT Fundamentals Certificate</h3>
+                  <p className="text-[#0980b2] font-semibold text-lg">Thokoza Progressive Youth</p>
+                </div>
+                <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
+                  2018
+                </span>
+              </div>
+              
+              <div className="space-y-3 text-[#191f41] leading-relaxed">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-[#0980b2] rounded-full mt-2 flex-shrink-0"></div>
+                  <p>Acquired foundational knowledge in information technology concepts and computer systems.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* High School */}
+          <motion.div 
+            className="relative flex items-start group"
+            variants={item}
+          >
+            {/* Timeline Dot */}
+            <div className="absolute left-6 w-4 h-4 bg-[#0980b2]/50 rounded-full border-4 border-white shadow-lg z-10 group-hover:scale-110 transition-transform duration-300" />
+            
+            {/* Content */}
+            <div className="ml-20 w-full">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#191f41] mb-1">National Senior Certificate</h3>
+                  <p className="text-[#0980b2] font-semibold text-lg">Nsalamanga High School</p>
+                </div>
+                <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
+                  2016
+                </span>
+              </div>
+              
+              <div className="space-y-3 text-[#191f41] leading-relaxed">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-[#0980b2] rounded-full mt-2 flex-shrink-0"></div>
+                  <p>Completed secondary education with a focus on mathematics and science subjects.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
       {/* Projects Section */}
-      <section id="projects" className="py-16 sm:py-24 bg-[#f9fafb]">
+      <section id="projects" className="py-16 sm:py-24 bg-[#f9fafb]" ref={projectsRef}>
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial="hidden"
+            animate={projectsInView ? "show" : "hidden"}
+            variants={fadeIn}
+          >
             <h2 className="text-3xl font-bold text-[#191f41] mb-4">Featured Projects</h2>
             <p className="text-grey-50 max-w-2xl mx-auto">
               A selection of projects I've worked on throughout my career
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="mb-4">
-                  <div className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center">
-                    <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={container}
+            initial="hidden"
+            animate={projectsInView ? "show" : "hidden"}
+          >
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    <motion.div 
+                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-[#191f41] mb-2">Mzingisi Web Design</h3>
+                    <p className="text-grey-50 mb-4">
+                      Created a comprehensive website for Mzingisi construction to improve customer accessibility.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Web Design</Badge>
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Client Project</Badge>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-[#191f41] mb-2">Mzingisi Web Design</h3>
-                  <p className="text-grey-50 mb-4">
-                    Created a comprehensive website for Mzingisi construction to improve customer accessibility.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Web Design</Badge>
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Client Project</Badge>
-                  </div>
-                </div>
-                <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </Button>
-              </CardContent>
-            </Card>
+                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View Project
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="mb-4">
-                  <div className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center">
-                    <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    <motion.div 
+                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-[#191f41] mb-2">Spaza Eats System</h3>
+                    <p className="text-grey-50 mb-4">
+                      Managed dispatch operations and updated website systems to ensure optimal functionality.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">System Management</Badge>
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Optimization</Badge>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-[#191f41] mb-2">Spaza Eats System</h3>
-                  <p className="text-grey-50 mb-4">
-                    Managed dispatch operations and updated website systems to ensure optimal functionality.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">System Management</Badge>
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Optimization</Badge>
-                  </div>
-                </div>
-                <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </Button>
-              </CardContent>
-            </Card>
+                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View Project
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
-                <div className="mb-4">
-                  <div className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center">
-                    <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+            <motion.div variants={item}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    <motion.div 
+                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-[#191f41] mb-2">GMNT Client Websites</h3>
+                    <p className="text-grey-50 mb-4">
+                      Developed multiple client websites using modern technologies and integrated MongoDB databases.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Full Stack</Badge>
+                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">MongoDB</Badge>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-[#191f41] mb-2">GMNT Client Websites</h3>
-                  <p className="text-grey-50 mb-4">
-                    Developed multiple client websites using modern technologies and integrated MongoDB databases.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Full Stack</Badge>
-                    <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">MongoDB</Badge>
-                  </div>
-                </div>
-                <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View Project
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-
-     {/* Footer */}
-<footer className="bg-[#191f41] text-white py-12">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-      <div>
-        <h3 className="text-xl font-bold mb-2">Phumlani Mthembu</h3>
-        <p className="text-grey-50">Software Developer</p>
-      </div>
-      <div className="flex space-x-4">
-        <a href="https://github.com/banelee59" target="_blank" rel="noopener noreferrer">
-          <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
-            <Github className="w-5 h-5" />
-          </Button>
-        </a>
-        <a href="https://www.linkedin.com/in/phumlani-mthembu-797339233?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
-          <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
-            <Linkedin className="w-5 h-5" />
-          </Button>
-        </a>
-        <a href="mailto:banelee59@gmail.com">
-          <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
-            <Mail className="w-5 h-5" />
-          </Button>
-        </a>
-      </div>
-    </div>
-    <Separator className="my-8 bg-[#0980b2]/30" />
-    <div className="text-center text-sm text-grey-50">
-      © {new Date().getFullYear()} Phumlani Sibonelo Mthembu. All rights reserved.
-    </div>
-  </div>
-</footer>
+      {/* Footer */}
+      <motion.footer 
+        className="bg-[#191f41] text-white py-12"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+              <h3 className="text-xl font-bold mb-2">Phumlani Mthembu</h3>
+              <p className="text-grey-50">Software Developer</p>
+            </div>
+            <div className="flex space-x-4">
+              <a href="https://github.com/banelee59" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                    <Github className="w-5 h-5" />
+                  </motion.div>
+                </Button>
+              </a>
+              <a href="https://www.linkedin.com/in/phumlani-mthembu-797339233?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                    <Linkedin className="w-5 h-5" />
+                  </motion.div>
+                </Button>
+              </a>
+              <a href="mailto:banelee59@gmail.com">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-[#0980b2]/20">
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                    <Mail className="w-5 h-5" />
+                  </motion.div>
+                </Button>
+              </a>
+            </div>
+          </div>
+          <Separator className="my-8 bg-[#0980b2]/30" />
+          <div className="text-center text-sm text-grey-50">
+            © {new Date().getFullYear()} Phumlani Sibonelo Mthembu. All rights reserved.
+          </div>
+        </div>
+      </motion.footer>
     </div>
   )
 }
