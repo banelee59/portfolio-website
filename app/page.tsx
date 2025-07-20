@@ -594,144 +594,144 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="py-16 sm:py-24" ref={skillsRef}>
-        <div className="container mx-auto px-4 sm:px-6">
-          <motion.div 
-            className="text-center mb-12"
-            initial="hidden"
-            animate={skillsInView ? "show" : "hidden"}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl font-bold text-[#191f41] mb-4">Skills & Technologies</h2>
-            <p className="text-grey-50 max-w-2xl mx-auto">
-              The tools and technologies I've mastered through 2+ years of professional experience
-            </p>
-          </motion.div>
+    {/* Skills Section */}
+<section className="py-16 sm:py-24" ref={skillsRef}>
+  <div className="container mx-auto px-4 sm:px-6">
+    <motion.div 
+      className="text-center mb-12"
+      initial="hidden"
+      animate={skillsInView ? "show" : "hidden"}
+      variants={fadeIn}
+    >
+      <h2 className="text-3xl font-bold text-[#191f41] mb-4">Skills & Technologies</h2>
+      <p className="text-grey-50 max-w-2xl mx-auto">
+        The tools and technologies I've mastered through 2+ years of professional experience
+      </p>
+    </motion.div>
 
-          <motion.div 
-            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={container}
-            initial="hidden"
-            animate={skillsInView ? "show" : "hidden"}
-          >
-            {/* Frontend Technologies */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <Code className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Frontend</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">HTML</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">CSS</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Next.js</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Tailwind CSS</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+    <motion.div 
+      className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      variants={container}
+      initial="hidden"
+      animate={skillsInView ? "show" : "hidden"}
+    >
+      {/* Frontend Technologies */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <Code className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Frontend</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">HTML</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">CSS</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">JavaScript</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">TypeScript</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">React</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Next.js</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Tailwind CSS</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            {/* Backend Technologies */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <Code className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Backend</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Node.js</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Express</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MongoDB</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">MySQL</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+      {/* Backend Technologies */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <Code className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Backend</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Node.js</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Express</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">MongoDB</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">MySQL</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            {/* Mobile Development */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <Code className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Mobile</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">React Native</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">JavaScript</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">TypeScript</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+      {/* Mobile Development */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <Code className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Mobile</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">React Native</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">JavaScript</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">TypeScript</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            {/* Version Control */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <Github className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Version Control</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Git</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">GitHub</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+      {/* Version Control */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <Github className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Version Control</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Git</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">GitHub</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            {/* Deployment */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <ExternalLink className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Deployment</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Vercel</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+      {/* Deployment */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <ExternalLink className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Deployment</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Vercel</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            {/* Tools */}
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center">
-                      <Code className="text-[#0980b2]" />
-                    </div>
-                    <h3 className="font-bold text-[#191f41]">Tools</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">VS Code</Badge>
-                    <Badge className="bg-[#0980b2] hover:bg-[#0980b2]/90 text-white">Figma</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Tools */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-lg transition-all duration-300 ease-in-out hover:border-[#0980b2]/30 border-2 border-transparent">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 bg-[#191f41]/10 rounded-lg flex items-center justify-center hover:bg-[#0980b2]/20 transition-colors">
+                <Code className="text-[#0980b2] hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="font-bold text-[#191f41] hover:text-[#0980b2] transition-colors">Tools</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">VS Code</Badge>
+              <Badge className="bg-[#0980b2] hover:bg-[#191f41] text-white transition-colors cursor-default">Figma</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
 
       {/* Education Section */}
@@ -869,109 +869,134 @@ export default function Portfolio() {
 
 
       {/* Projects Section */}
-      <section id="projects" className="py-16 sm:py-24 bg-[#f9fafb]" ref={projectsRef}>
-        <div className="container mx-auto px-4 sm:px-6">
-          <motion.div 
-            className="text-center mb-12"
-            initial="hidden"
-            animate={projectsInView ? "show" : "hidden"}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl font-bold text-[#191f41] mb-4">Featured Projects</h2>
-            <p className="text-grey-50 max-w-2xl mx-auto">
-              A selection of projects I've worked on throughout my career
-            </p>
-          </motion.div>
+<section id="projects" className="py-16 sm:py-24 bg-[#f9fafb]" ref={projectsRef}>
+  <div className="container mx-auto px-4 sm:px-6">
+    <motion.div 
+      className="text-center mb-12"
+      initial="hidden"
+      animate={projectsInView ? "show" : "hidden"}
+      variants={fadeIn}
+    >
+      <h2 className="text-3xl font-bold text-[#191f41] mb-4">Featured Projects</h2>
+      <p className="text-grey-50 max-w-2xl mx-auto">
+        A selection of projects I've worked on throughout my career
+      </p>
+    </motion.div>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={container}
-            initial="hidden"
-            animate={projectsInView ? "show" : "hidden"}
-          >
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <motion.div 
-                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
-                      whileHover={{ scale: 1.02 }}
-                    >
-                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold text-[#191f41] mb-2">Mzingisi Web Design</h3>
-                    <p className="text-grey-50 mb-4">
-                      Created a comprehensive website for Mzingisi construction to improve customer accessibility.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Web Design</Badge>
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Client Project</Badge>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View Project
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      variants={container}
+      initial="hidden"
+      animate={projectsInView ? "show" : "hidden"}
+    >
+      {/* Project 1 */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-md transition-shadow hover:border-[#0980b2]/50 hover:border-2">
+          <CardContent className="p-6">
+            <div className="mb-4">
+              <motion.div 
+                className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                whileHover={{ scale: 1.02 }}
+              >
+                <Image 
+                  src="/project-placeholder-1.jpg" 
+                  alt="Project 1 Screenshot" 
+                  width={300} 
+                  height={160}
+                  className="rounded-lg object-cover"
+                />
+              </motion.div>
+              <h3 className="text-xl font-bold text-[#191f41] mb-2 hover:text-[#0980b2] transition-colors">Portfolio Website</h3>
+              <p className="text-grey-50 mb-4 hover:text-[#191f41] transition-colors">
+                A personal portfolio website built with Next.js and Tailwind CSS to showcase my work.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">Next.js</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">Tailwind</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">React</Badge>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10 hover:scale-[1.02] transition-transform">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View on GitHub
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <motion.div 
-                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
-                      whileHover={{ scale: 1.02 }}
-                    >
-                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold text-[#191f41] mb-2">Spaza Eats System</h3>
-                    <p className="text-grey-50 mb-4">
-                      Managed dispatch operations and updated website systems to ensure optimal functionality.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">System Management</Badge>
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Optimization</Badge>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View Project
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
+      {/* Project 2 */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-md transition-shadow hover:border-[#0980b2]/50 hover:border-2">
+          <CardContent className="p-6">
+            <div className="mb-4">
+              <motion.div 
+                className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                whileHover={{ scale: 1.02 }}
+              >
+                <Image 
+                  src="/project-placeholder-2.jpg" 
+                  alt="Project 2 Screenshot" 
+                  width={300} 
+                  height={160}
+                  className="rounded-lg object-cover"
+                />
+              </motion.div>
+              <h3 className="text-xl font-bold text-[#191f41] mb-2 hover:text-[#0980b2] transition-colors">Task Management App</h3>
+              <p className="text-grey-50 mb-4 hover:text-[#191f41] transition-colors">
+                A simple task management application with CRUD functionality built with React.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">React</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">Node.js</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">MongoDB</Badge>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10 hover:scale-[1.02] transition-transform">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View Live Demo
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-            <motion.div variants={item}>
-              <Card className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <motion.div 
-                      className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
-                      whileHover={{ scale: 1.02 }}
-                    >
-                      <FolderOpen className="w-12 h-12 text-[#0980b2]" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold text-[#191f41] mb-2">GMNT Client Websites</h3>
-                    <p className="text-grey-50 mb-4">
-                      Developed multiple client websites using modern technologies and integrated MongoDB databases.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">Full Stack</Badge>
-                      <Badge variant="outline" className="border-[#0980b2] text-[#0980b2]">MongoDB</Badge>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View Project
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Project 3 */}
+      <motion.div variants={item} whileHover={{ y: -5 }}>
+        <Card className="hover:shadow-md transition-shadow hover:border-[#0980b2]/50 hover:border-2">
+          <CardContent className="p-6">
+            <div className="mb-4">
+              <motion.div 
+                className="w-full h-40 bg-[#191f41]/10 rounded-lg mb-4 flex items-center justify-center"
+                whileHover={{ scale: 1.02 }}
+              >
+                <Image 
+                  src="/project-placeholder-3.jpg" 
+                  alt="Project 3 Screenshot" 
+                  width={300} 
+                  height={160}
+                  className="rounded-lg object-cover"
+                />
+              </motion.div>
+              <h3 className="text-xl font-bold text-[#191f41] mb-2 hover:text-[#0980b2] transition-colors">E-commerce Template</h3>
+              <p className="text-grey-50 mb-4 hover:text-[#191f41] transition-colors">
+                A responsive e-commerce template with product listings and cart functionality.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">HTML/CSS</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">JavaScript</Badge>
+                <Badge variant="outline" className="border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10">Bootstrap</Badge>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full border-[#0980b2] text-[#0980b2] hover:bg-[#0980b2]/10 hover:scale-[1.02] transition-transform">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              View Code
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <motion.footer 
