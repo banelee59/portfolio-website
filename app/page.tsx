@@ -493,7 +493,7 @@ export default function Portfolio() {
                           Current Position
                         </div>
                         <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
-                          Oct 2023 - Present
+                          Oct 2024 - Present
                         </span>
                       </div>
                     </div>
@@ -531,7 +531,7 @@ export default function Portfolio() {
                         <p className="text-[#0980b2] font-semibold text-lg">Spaza Eats</p>
                       </div>
                       <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
-                        May 2023 - Sep 2023
+                        May 2024 - Sep 2024
                       </span>
                     </div>
                     
@@ -568,7 +568,7 @@ export default function Portfolio() {
                         <p className="text-[#0980b2] font-semibold text-lg">Mzingisi Simplified Solutions</p>
                       </div>
                       <span className="text-[#0980b2] font-medium bg-[#0980b2]/10 px-3 py-1 rounded-full text-sm">
-                        Jun 2022 - Apr 2023
+                        Jun 2023 - Apr 2024
                       </span>
                     </div>
                     
