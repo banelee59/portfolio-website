@@ -51,8 +51,12 @@ export default function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <div className="relative inline-block mb-6 group-hover:scale-105 transition-transform duration-300">
-                    <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg hover:bg-gradient-to-bl hover:shadow-xl transition-all duration-300">
-                      PS
+                    <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ring-4 ring-gradient-to-br from-blue-400 to-purple-500 hover:ring-8 hover:ring-blue-300">
+                      <img 
+                        src="/images/ps pic.jpeg" 
+                        alt="Profile Picture" 
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      />
                     </div>
                     <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full border-4 border-white shadow-md hover:bg-green-500 hover:scale-110 transition-all duration-300"></div>
                   </div>
