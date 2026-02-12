@@ -12,8 +12,8 @@ export const EXPERIENCE_DATA = [
   {
     title: "Software Developer",
     company: "GMNT Holdings",
-    period: "Oct 2024 - Present",
-    current: true,
+    period: "Oct 2024 - Oct 2025",
+    current: false,
     points: [
       "Lead development of responsive web applications using React, Next.js, and Tailwind CSS, improving client engagement by 40%.",
       "Architected and maintained scalable project codebases, implementing modern UI components and ensuring cross-browser compatibility.",
@@ -48,17 +48,17 @@ export const SKILLS_DATA = [
   {
     category: "Frontend",
     icon: Code,
-    skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"]
+    skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Bootstrap", "React", "Next.js", "Tailwind CSS"]
   },
   {
     category: "Backend",
     icon: Code,
-    skills: ["Node.js", "Express", "MongoDB", "MySQL"]
+    skills: ["Node.js", "Express", "MongoDB", "MySQL", "RESTful API Design", "Postman"]
   },
   {
     category: "Mobile",
     icon: Code,
-    skills: ["React Native", "JavaScript", "TypeScript"]
+    skills: ["React Native", "JavaScript", "TypeScript", "Expo"]
   },
   {
     category: "Version Control",
@@ -68,7 +68,7 @@ export const SKILLS_DATA = [
   {
     category: "Deployment",
     icon: ExternalLink,
-    skills: ["Vercel"]
+    skills: ["Vercel", "Netlify"]
   },
   {
     category: "Tools",
@@ -107,24 +107,24 @@ export const EDUCATION_DATA = [
 
 export const PROJECTS_DATA = [
   {
-    title: "Portfolio Website",
-    description: "A personal portfolio website built with Next.js and Tailwind CSS to showcase my work.",
+    title: "Vilgro Energy Website",
+    description: "Vilgro is the official site for Vilgro Energy, a company focused on energy solutions in Africa, particularly in Southern Africa. The site presents the company’s mission, services, values, and contact information.",
     technologies: ["Next.js", "Tailwind", "React"],
-    image: "/project-placeholder-1.jpg",
-    link: "#"
+    image: "/images/vilgro.png",
+    link: "https://www.vilgro.com/"
   },
   {
-    title: "Task Management App",
-    description: "A simple task management application with CRUD functionality built with React.",
-    technologies: ["React", "Node.js", "MongoDB"],
-    image: "/project-placeholder-2.jpg",
-    link: "#"
+    title: "Eazi Ride Website",
+    description: "Eazi Ride Is a ride-hailing / e-hailing service web app — a platform where users can book rides, similar to Uber or Bolt. The live page itself prompts JavaScript to be enabled to run properly, indicating it’s a dynamic web application likely used for interacting with the service (booking rides, signing in, or accessing user dashboards).",
+    technologies: ["React", "HTML", "CSS", "JavaScript", "Tailwind" ],
+    image: "/images/eazi.png",
+    link: " https://eaziride-z7cw.vercel.app/"
   },
   {
-    title: "E-commerce Template",
-    description: "A responsive e-commerce template with product listings and cart functionality.",
-    technologies: ["HTML/CSS", "JavaScript", "Bootstrap"],
-    image: "/project-placeholder-3.jpg",
-    link: "#"
+    title: "Nthoestraight E-commerce Template",
+    description: "Nthoestraight Is a preview deployment of a modern Next.js-powered online store application showcasing a full e-commerce user experience, including browsing products and shopping features, hosted via Vercel as part of a development workflow.",
+    technologies: ["HTML/CSS", "JavaScript", "Node.js", "MongoDB", "Bootstrap"],
+    image: "/images/ntho.png",
+    link: "https://nthoestraight-ecommerce-git-ccfaa7-phumlanis-projects-49024bb5.vercel.app/"
   }
 ]
